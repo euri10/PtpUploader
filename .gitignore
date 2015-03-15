@@ -1,9 +1,3 @@
-<<<<<<< HEAD
-
-src/FlexGet/config.yml
-src/PtpUploader/Settings.ini
-=======
 src/FlexGet/config.yml
 src/PtpUploader/Settings.ini
 *.pyc
->>>>>>> upstream/master
