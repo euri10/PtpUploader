@@ -45,15 +45,9 @@ class CloudflareAdapter(HTTPAdapter):
         kwargs.pop("params", None)  # Don't pass on params
         try:
             challenge = re.search(r'name="jschl_vc" value="(\w+)"', page).group(1)
-<<<<<<< HEAD
             builder = re.search(r"setTimeout\(function\(\){\s+(var t,r,a,f.+?\r?\n[\s\S]+?a\.value =.+?)\r?\n",
                                 page).group(1)
-=======
-            challenge_pass = re.search(r'name="pass" value="(.+?)"', page).group(1)
 
-            # Extract the arithmetic operation
-            builder = re.search(r"setTimeout\(function\(\){\s+(var t,r,a,f.+?\r?\n[\s\S]+?a\.value =.+?)\r?\n", page).group(1)
->>>>>>> upstream/master
             builder = re.sub(r"a\.value =(.+?) \+ .+?;", r"\1", builder)
             builder = re.sub(r"\s{3,}[a-z](?: = |\.).+", "", builder)
             builder = builder.replace("parseInt", "return parseInt")

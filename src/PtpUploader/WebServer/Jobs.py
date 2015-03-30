@@ -165,7 +165,7 @@ def jobs(page):
 @app.route("/job/<int:jobId>/start/")
 @requires_auth
 def StartJob(jobId):
-<<<<<<< HEAD
+
     # TODO: This is very far from perfect. There is no guarantee that the job didn't start meanwhile.
     # Probably only the WorkerThread should change the running state.
     releaseInfo = Database.DbSession.query(ReleaseInfo).filter(ReleaseInfo.Id == jobId).first()
@@ -198,36 +198,4 @@ def StopJob(jobId):
 
     MyGlobals.PtpUploader.AddMessage(PtpUploaderMessageStopJob(jobId))
     return "OK"
-=======
-	# TODO: This is very far from perfect. There is no guarantee that the job didn't start meanwhile.
-	# Probably only the WorkerThread should change the running state.		
-	releaseInfo = Database.DbSession.query( ReleaseInfo ).filter( ReleaseInfo.Id == jobId ).first()
-	if not releaseInfo.CanResumed():
-		return "The job is already running!"
 
-	releaseInfo.JobRunningState = JobRunningState.WaitingForStart
-	
-	# Make sure that job is no longer handled as an automatically started job.
-	# Manual forced jobs will resumed as manual forced.
-	if releaseInfo.JobStartMode == JobStartMode.Automatic:
-		releaseInfo.JobStartMode = JobStartMode.Manual
-
-	# Resume the job normally.
-	releaseInfo.SetStopBeforeUploading( False )
-	
-	Database.DbSession.commit()
-	MyGlobals.PtpUploader.AddMessage( PtpUploaderMessageStartJob( jobId ) )
-	return "OK"
-
-@app.route( "/job/<int:jobId>/stop/" )
-@requires_auth
-def StopJob(jobId):
-	# TODO: This is very far from perfect. There is no guarantee that the job didn't stop meanwhile.
-	# Probably only the WorkerThread should change the running state.		
-	releaseInfo = Database.DbSession.query( ReleaseInfo ).filter( ReleaseInfo.Id == jobId ).first()
-	if not releaseInfo.CanStopped():
-		return "The job is already stopped!"
-	
-	MyGlobals.PtpUploader.AddMessage( PtpUploaderMessageStopJob( jobId ) )
-	return "OK"
->>>>>>> upstream/master
