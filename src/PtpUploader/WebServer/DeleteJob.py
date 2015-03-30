@@ -16,17 +16,10 @@ import os
 def DeleteTheJob(jobId):
     releaseInfo = Database.DbSession.query(ReleaseInfo).filter(ReleaseInfo.Id == jobId).first()
 
-<<<<<<< HEAD
     # TODO: This is very far from perfect. There is no guarantee that the job didn't start meanwhile.
     # Probably the WorkerThread should do the deleting.
     if not releaseInfo.CanDeleted():
         return "The job is currently running and can't be deleted!"
-=======
-	# TODO: This is very far from perfect. There is no guarantee that the job didn't start meanwhile.
-	# Probably the WorkerThread should do the deleting.
-	if not releaseInfo.CanDeleted():
-		return "The job is currently running and can't be deleted!"
->>>>>>> upstream/master
 
     deleteMode = request.args["mode"].upper()
     deleteSourceData = deleteMode == 'DELETEJOBANDSOURCEDATA' or deleteMode == 'DELETEJOBANDALLDATA'
