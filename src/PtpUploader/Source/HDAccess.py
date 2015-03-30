@@ -75,7 +75,8 @@ class HDAccess(SourceBase):
             releaseInfo.ImdbId = NfoParser.GetImdbId(description)
 
         # Get size.
-        matches = re.search(r"""<td class="heading" valign="top" align="right">Size</td><td valign="top" align="left">(.*)</td>""", description)
+        #                   <tr><td class='heading' valign='top' align='right'>Size</td><td valign='top' align='left'>13.21 GB</td></tr>
+        matches = re.search(r"""<td class='heading' valign='top' align='right'>Size</td><td valign='top' align='left'>(.*)</td>""", description)
         if matches is None:
             logger.warning("Size not found on torrent page.")
         else:
@@ -83,8 +84,7 @@ class HDAccess(SourceBase):
             releaseInfo.Size = GetSizeFromText(size)
 
         # Store the download URL.
-        # <a href="download.php?id=c787dc1e59f6245c159a02f4402a089141933f4d&f=Hand+Of+God+S01E01+Pilot+720p+WEBRip+x264-W4F+.torrent">
-        matches = re.search(r"""<a href="download.php\?torrent=(.+?)">""", description)
+        matches = re.search(r"""href="download.php\?torrent=(.+?)">""", description)
         if matches is None:
             raise PtpUploaderException(JobRunningState.Ignored_MissingInfo, "Download link can't be found on torrent page.")
         releaseInfo.SceneAccessDownloadUrl = "https://hdaccess.net/download.php?torrent=" + matches.group(1)
