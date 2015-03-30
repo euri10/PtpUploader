@@ -22,4 +22,8 @@ class ImageUploader:
         elif Settings.ImageHost == "whatimg":
             return WhatImg.Upload(logger, imagePath, imageUrl)
 
+<<<<<<< HEAD
         raise PtpUploaderException("Unknown image host: '%s'." % Settings.ImageHost)
+=======
+		raise PtpUploaderException( "Unknown image host: '%s'." % Settings.ImageHost )
+>>>>>>> upstream/master
