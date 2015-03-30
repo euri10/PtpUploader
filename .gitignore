@@ -1,3 +1,5 @@
 src/FlexGet/config.yml
+src/FlexGet/db-config.sqlite
+src/FlexGet/flexget.log
 src/PtpUploader/Settings.ini
 *.pyc
