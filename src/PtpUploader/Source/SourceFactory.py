@@ -3,6 +3,7 @@ from Source.Cinematik import Cinematik
 from Source.File import File
 from Source.FunFile import FunFile
 from Source.Gft import Gft
+from Source.HDAccess import HDAccess
 from Source.HDBits import HDBits
 from Source.HDTorrents import HDTorrents
 from Source.Karagarga import Karagarga
@@ -25,6 +26,7 @@ class SourceFactory:
         self.__AddSource(Cinematik())
         self.__AddSource(FunFile())
         self.__AddSource(Gft())
+        self.__AddSource(HDAccess())
         self.__AddSource(HDBits())
         self.__AddSource(HDTorrents())
         self.__AddSource(Karagarga())
